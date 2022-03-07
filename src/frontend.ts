@@ -11,7 +11,7 @@ import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
-import * as fsExtra from 'fs-extra';
+import { copySync } from 'fs-extra';
 
 export class Frontend extends Stack {
   public readonly siteBucket: s3.Bucket;
@@ -51,13 +51,14 @@ export class Frontend extends Stack {
             try {
               execSync('esbuild --version', execOptions);
             } catch {
+              /* istanbul ignore next */
               return false;
             }
             execSync(
-              'cd site/build || (cd site && yarn install --frozen-lockfile && yarn build)',
+              'cd site && yarn install --frozen-lockfile && yarn build',
               execOptions,
             );
-            fsExtra.copySync('./site/build', outputDir, {
+            copySync('./site/build', outputDir, {
               ...execOptions,
               recursive: true,
             });

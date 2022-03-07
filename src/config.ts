@@ -9,7 +9,7 @@ interface ConfigProps extends StackProps {
 }
 
 export class Config extends Stack {
-  constructor(scope: Construct, id: string, props?: ConfigProps) {
+  constructor(scope: Construct, id: string, props: ConfigProps) {
     super(scope, id, props);
 
     new customresource.AwsCustomResource(this, 'ConfigFrontEnd', {
@@ -17,8 +17,8 @@ export class Config extends Stack {
         service: 'S3',
         action: 'putObject',
         parameters: {
-          Body: JSON.stringify(props?.config),
-          Bucket: props?.siteBucket.bucketName,
+          Body: JSON.stringify(props.config),
+          Bucket: props.siteBucket.bucketName,
           Key: 'config.json',
         },
         physicalResourceId: customresource.PhysicalResourceId.of(

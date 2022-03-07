@@ -1,15 +1,21 @@
 const { awscdk } = require('projen');
 const project = new awscdk.AwsCdkTypeScriptApp({
+  author: 'Court Schuett',
+  authorAddress: 'https://subaud.io',
   cdkVersion: '2.15.0',
   defaultReleaseBranch: 'main',
   name: 'full-stack-cdk-example',
-  // peerDeps: ['esbuild'],
-  deps: [
-    'fs-extra',
-    '@types/fs-extra',
-  ] /* Runtime dependencies of this module. */,
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: ['esbuild'] /* Build dependencies for this module. */,
-  // packageName: undefined,  /* The "name" in package.json. */
+  deps: ['fs-extra', '@types/fs-extra'],
+  autoApproveOptions: {
+    secret: 'GITHUB_TOKEN',
+    allowedUsernames: ['schuettc'],
+  },
+  depsUpgradeOptions: {
+    ignoreProjen: false,
+    workflowOptions: {
+      labels: ['auto-approve', 'auto-merge'],
+    },
+  },
+  repositoryUrl: 'https://github.com/schuettc/full-stack-cdk-example',
 });
 project.synth();
