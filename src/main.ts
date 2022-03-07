@@ -26,16 +26,15 @@ export class FullStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
     super(scope, id, props);
 
-    pipelines.CodePipelineSource.connection('org/repo', 'branch', {
-      connectionArn:
-        'arn:aws:codestar-connections:us-east-1:316091283514:connection/3b36b888-9a66-4f83-ac94-305963414e7d',
-    });
-
     const pipeline = new pipelines.CodePipeline(this, 'Pipeline', {
       synth: new pipelines.ShellStep('Synth', {
-        input: pipelines.CodePipelineSource.gitHub(
+        input: pipelines.CodePipelineSource.connection(
           'schuettc/full-stack-cdk-example',
           'main',
+          {
+            connectionArn:
+              'arn:aws:codestar-connections:us-east-1:316091283514:connection/3b36b888-9a66-4f83-ac94-305963414e7d',
+          },
         ),
         commands: [
           'yarn install --frozen-lockfile',
@@ -57,6 +56,6 @@ const devEnv = {
 
 const app = new App();
 
-new FullStack(app, 'my-stack-dev', { env: devEnv });
+new FullStack(app, 'FullStack', { env: devEnv });
 
 app.synth();

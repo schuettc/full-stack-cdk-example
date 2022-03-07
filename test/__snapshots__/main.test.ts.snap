@@ -35,16 +35,14 @@ Object {
               Object {
                 "ActionTypeId": Object {
                   "Category": "Source",
-                  "Owner": "ThirdParty",
-                  "Provider": "GitHub",
+                  "Owner": "AWS",
+                  "Provider": "CodeStarSourceConnection",
                   "Version": "1",
                 },
                 "Configuration": Object {
-                  "Branch": "main",
-                  "OAuthToken": "{{resolve:secretsmanager:github-token:SecretString:::}}",
-                  "Owner": "schuettc",
-                  "PollForSourceChanges": false,
-                  "Repo": "full-stack-cdk-example",
+                  "BranchName": "main",
+                  "ConnectionArn": "arn:aws:codestar-connections:us-east-1:316091283514:connection/3b36b888-9a66-4f83-ac94-305963414e7d",
+                  "FullRepositoryId": "schuettc/full-stack-cdk-example",
                 },
                 "Name": "schuettc_full-stack-cdk-example",
                 "OutputArtifacts": Array [
@@ -52,6 +50,12 @@ Object {
                     "Name": "schuettc_full_stack_cdk_example_Source",
                   },
                 ],
+                "RoleArn": Object {
+                  "Fn::GetAtt": Array [
+                    "PipelineSourceschuettcfullstackcdkexampleCodePipelineActionRoleEDC2B42D",
+                    "Arn",
+                  ],
+                },
                 "RunOrder": 1,
               },
             ],
@@ -1866,6 +1870,16 @@ Object {
               "Effect": "Allow",
               "Resource": Object {
                 "Fn::GetAtt": Array [
+                  "PipelineSourceschuettcfullstackcdkexampleCodePipelineActionRoleEDC2B42D",
+                  "Arn",
+                ],
+              },
+            },
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
                   "PipelineBuildSynthCodePipelineActionRole4E7A6C97",
                   "Arn",
                 ],
@@ -1980,26 +1994,116 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
-    "PipelineSourceschuettcfullstackcdkexampleWebhookResource19BAB730": Object {
+    "PipelineSourceschuettcfullstackcdkexampleCodePipelineActionRoleDefaultPolicyA4AC84A2": Object {
       "Properties": Object {
-        "Authentication": "GITHUB_HMAC",
-        "AuthenticationConfiguration": Object {
-          "SecretToken": "{{resolve:secretsmanager:github-token:SecretString:::}}",
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "codestar-connections:UseConnection",
+              "Effect": "Allow",
+              "Resource": "arn:aws:codestar-connections:us-east-1:316091283514:connection/3b36b888-9a66-4f83-ac94-305963414e7d",
+            },
+            Object {
+              "Action": Array [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+                "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
+                "s3:Abort*",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "PipelineArtifactsBucketAEA9A052",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "PipelineArtifactsBucketAEA9A052",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            Object {
+              "Action": Array [
+                "s3:PutObjectAcl",
+                "s3:PutObjectVersionAcl",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    Object {
+                      "Fn::GetAtt": Array [
+                        "PipelineArtifactsBucketAEA9A052",
+                        "Arn",
+                      ],
+                    },
+                    "/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
         },
-        "Filters": Array [
+        "PolicyName": "PipelineSourceschuettcfullstackcdkexampleCodePipelineActionRoleDefaultPolicyA4AC84A2",
+        "Roles": Array [
           Object {
-            "JsonPath": "$.ref",
-            "MatchEquals": "refs/heads/{Branch}",
+            "Ref": "PipelineSourceschuettcfullstackcdkexampleCodePipelineActionRoleEDC2B42D",
           },
         ],
-        "RegisterWithThirdParty": true,
-        "TargetAction": "schuettc_full-stack-cdk-example",
-        "TargetPipeline": Object {
-          "Ref": "Pipeline9850B417",
-        },
-        "TargetPipelineVersion": 1,
       },
-      "Type": "AWS::CodePipeline::Webhook",
+      "Type": "AWS::IAM::Policy",
+    },
+    "PipelineSourceschuettcfullstackcdkexampleCodePipelineActionRoleEDC2B42D": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
     },
     "PipelineUpdatePipelineSelfMutateCodePipelineActionRoleD6D4E5CF": Object {
       "Properties": Object {
