@@ -1,6 +1,6 @@
 const { awscdk } = require('projen');
 const project = new awscdk.AwsCdkTypeScriptApp({
-  cdkVersion: '2.1.0',
+  cdkVersion: '2.15.0',
   defaultReleaseBranch: 'main',
   name: 'full-stack-cdk-example',
   // peerDeps: ['esbuild'],
@@ -9,7 +9,7 @@ const project = new awscdk.AwsCdkTypeScriptApp({
     '@types/fs-extra',
   ] /* Runtime dependencies of this module. */,
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  devDeps: ['esbuild'] /* Build dependencies for this module. */,
+  // devDeps: ['esbuild'] /* Build dependencies for this module. */,
   // packageName: undefined,  /* The "name" in package.json. */
 });
 project.synth();
