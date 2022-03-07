@@ -1,31 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
 import { Amplify } from '@aws-amplify/core';
 import { API } from 'aws-amplify';
-import { AmplifyConfig as config } from './Config';
+import { config } from './Config';
+import React, { useState, useEffect } from 'react';
 
-Amplify.configure(config);
-API.configure(config);
 Amplify.Logger.LOG_LEVEL = 'DEBUG';
 
 function App() {
+  const [randomNumber, setRandomNumber] = useState([]);
+  useEffect(() => {
+    async function getDemo() {
+      const apiConfig = await config();
+      API.configure(apiConfig);
+      const randomNumberResult = await API.post('demoApi', 'demo', {
+        body: {},
+      });
+      setRandomNumber(randomNumberResult);
+    }
+    getDemo();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="App">Your randomly generated number: {randomNumber}</div>
   );
 }
 

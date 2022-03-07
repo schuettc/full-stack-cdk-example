@@ -776,7 +776,7 @@ Object {
     },
     \\"build\\": {
       \\"commands\\": [
-        \\"cdk-assets --path \\\\\\"assembly-test-Stages/testStagesBackendF6A53866.assets.json\\\\\\" --verbose publish \\\\\\"31b4ee20fa65e47897f7dc32c36816ecb2186f47395e7a01e30c94872524e4e8:current_account-current_region\\\\\\"\\"
+        \\"cdk-assets --path \\\\\\"assembly-test-Stages/testStagesBackendF6A53866.assets.json\\\\\\" --verbose publish \\\\\\"5b568627b61e004f713d2b2161681724372961e6d39ac095894483cff1c7a89c:current_account-current_region\\\\\\"\\"
       ]
     }
   }
@@ -1200,7 +1200,7 @@ Object {
     },
     \\"build\\": {
       \\"commands\\": [
-        \\"cdk-assets --path \\\\\\"assembly-test-Stages/testStagesFrontend5F4F7714.assets.json\\\\\\" --verbose publish \\\\\\"ed797a6cc66b41210352622ab093357282339af61637bd3dca738923d7eae736:current_account-current_region\\\\\\"\\"
+        \\"cdk-assets --path \\\\\\"assembly-test-Stages/testStagesFrontend5F4F7714.assets.json\\\\\\" --verbose publish \\\\\\"1bd8048374f6780dd1109bb3c46985c13bb3059226d83e077d95d95f17800a2d:current_account-current_region\\\\\\"\\"
       ]
     }
   }

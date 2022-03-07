@@ -1,13 +1,17 @@
-const config = async () =>
-  await fetch('./config.json').then((response) => response.json());
+// console.log(config);
+export async function config() {
+  const data = await fetch('./config.json').then((response) => response.json());
 
-export const AmplifyConfig = {
-  API: {
-    endpoints: [
-      {
-        name: 'demoApi',
-        endpoint: config.API_URL,
-      },
-    ],
-  },
-};
+  const AmplifyConfig = {
+    API: {
+      endpoints: [
+        {
+          name: 'demoApi',
+          endpoint: data.API_URL,
+        },
+      ],
+    },
+  };
+
+  return AmplifyConfig;
+}

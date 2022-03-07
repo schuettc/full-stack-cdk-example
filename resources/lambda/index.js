@@ -1,15 +1,8 @@
-const AWS = require('aws-sdk');
-// Create client outside of handler to reuse
-const lambda = new AWS.Lambda();
-
 // Handler
 exports.handler = async function (event, context) {
-  console.log('## ENVIRONMENT VARIABLES: ' + serialize(process.env));
-  console.log('## CONTEXT: ' + serialize(context));
-  console.log('## EVENT: ' + serialize(event));
   try {
-    let accountSettings = await getAccountSettings();
-    return formatResponse(serialize(accountSettings.AccountUsage));
+    result = Math.floor(Math.random() * 100);
+    return formatResponse();
   } catch (error) {
     return formatError(error);
   }
@@ -20,11 +13,11 @@ var formatResponse = function (body) {
     statusCode: 200,
     headers: {
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS,POST',
     },
     isBase64Encoded: false,
-    multiValueHeaders: {
-      'X-Custom-Header': ['My value', 'My other value'],
-    },
     body: body,
   };
   return response;
@@ -35,18 +28,13 @@ var formatError = function (error) {
     statusCode: error.statusCode,
     headers: {
       'Content-Type': 'text/plain',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS,POST',
       'x-amzn-ErrorType': error.code,
     },
     isBase64Encoded: false,
     body: error.code + ': ' + error.message,
   };
   return response;
-};
-// Use SDK client
-var getAccountSettings = function () {
-  return lambda.getAccountSettings().promise();
-};
-
-var serialize = function (object) {
-  return JSON.stringify(object, null, 2);
 };
