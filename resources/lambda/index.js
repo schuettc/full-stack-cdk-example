@@ -1,8 +1,9 @@
 // Handler
 exports.handler = async function (event, context) {
   try {
-    result = Math.floor(Math.random() * 100);
-    return formatResponse();
+    const result = Math.floor(Math.random() * 100);
+    console.log('Randomly generated number: ', result);
+    return formatResponse(result);
   } catch (error) {
     return formatError(error);
   }
