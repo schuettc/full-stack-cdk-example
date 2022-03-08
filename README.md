@@ -1,6 +1,8 @@
 ## Full Stack CDK Example
 
-This example will build a CDK Pipeline that will build a backend and frontend and then pass API Gateway URL information from the backend to the frontend. This information can be used to make calls to the backend without having to manually pass the URL information.
+This example will build a CDK Pipeline that will build a backend and frontend and then pass API Gateway URL information from the backend to the frontend. This information can be used to make calls to the backend without having to manually pass the URL information. When connected to a Github repo, the CDK pipeline will automatically trigger and rebuild so changes to any portion of the app through GitHub.
+
+**Please note: this deployment will create a file that will be accessible to the public so sensitive information should not be included. **
 
 ![Overview](images/Overview.png)
 
