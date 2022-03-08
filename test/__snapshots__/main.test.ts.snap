@@ -1200,7 +1200,7 @@ Object {
     },
     \\"build\\": {
       \\"commands\\": [
-        \\"cdk-assets --path \\\\\\"assembly-test-Stages/testStagesFrontend5F4F7714.assets.json\\\\\\" --verbose publish \\\\\\"88097c44792b1e298b09cf2521c01bfea75edbddcfb765357c55f7991f379b07:current_account-current_region\\\\\\"\\"
+        \\"cdk-assets --path \\\\\\"assembly-test-Stages/testStagesFrontend5F4F7714.assets.json\\\\\\" --verbose publish \\\\\\"456d41e4953f49d3c4baf6da3793f4fdca99ae479626fde28db17600bb67bcce:current_account-current_region\\\\\\"\\"
       ]
     }
   }
