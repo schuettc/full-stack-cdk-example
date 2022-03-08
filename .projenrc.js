@@ -3,6 +3,8 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   author: 'Court Schuett',
   authorAddress: 'https://subaud.io',
   cdkVersion: '2.15.0',
+  license: 'MIT-0',
+  copyrightOwner: 'Court Schuett',
   defaultReleaseBranch: 'main',
   name: 'full-stack-cdk-example',
   deps: ['fs-extra', '@types/fs-extra'],
