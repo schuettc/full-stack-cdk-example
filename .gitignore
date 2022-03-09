@@ -51,4 +51,9 @@ junit.xml
 /cdk.out/
 .cdk.staging/
 .parcel-cache/
+cdk.out
+cdk.context.json
+yarn-error.log
+dependabot.yml
+*.drawio
 !/.github/workflows/upgrade.yml
