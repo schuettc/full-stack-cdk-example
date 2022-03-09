@@ -20,4 +20,14 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   },
   repositoryUrl: 'https://github.com/schuettc/full-stack-cdk-example',
 });
+
+const common_exclude = [
+  'cdk.out',
+  'cdk.context.json',
+  'yarn-error.log',
+  'dependabot.yml',
+  '*.drawio',
+];
+
+project.gitignore.exclude(...common_exclude);
 project.synth();
