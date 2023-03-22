@@ -13,6 +13,7 @@ const project = new awscdk.AwsCdkTypeScriptApp({
     secret: 'GITHUB_TOKEN',
     allowedUsernames: ['schuettc'],
   },
+  workflowNodeVersion: '16.x',
   depsUpgradeOptions: {
     ignoreProjen: false,
     workflowOptions: {
