@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@types/fs-extra": "^9.0.13",
-    "aws-cdk-lib": "^2.31.0",
+    "aws-cdk-lib": "^2.80.0",
     "constructs": "^10.0.5",
     "fs-extra": "^10.1.0"
   },
