@@ -12,12 +12,11 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   defaultReleaseBranch: 'main',
   name: 'full-stack-cdk-example',
   deps: ['fs-extra', '@types/fs-extra'],
-  devDeps: ['@types/prettier@2.6.0', 'esbuild', 'got@11.8.5', 'ts-node@^10'],
+  devDeps: ['esbuild'],
   autoApproveOptions: {
     secret: 'GITHUB_TOKEN',
     allowedUsernames: ['schuettc'],
   },
-  workflowNodeVersion: '16.x',
   depsUpgradeOptions: {
     ignoreProjen: false,
     workflowOptions: {
